@@ -1,227 +1,313 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Maitri Patangiya - Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f5f4ef" />
+  <meta name="description" content="Maitri Patangiya — CSIT student exploring AI, machine learning, and thoughtful software." />
+  <title>Maitri Patangiya — Portfolio</title>
   <style>
     :root {
-      --bg-color: #ffffff;
-      --text-color: #212121;
-      --card-color: #f8f9fa;
-      --header-bg: linear-gradient(to right, #ff758c, #ff7eb3);
-      --highlight-color: #ff4081;
+      color-scheme: light;
+      --paper: #f5f4ef;
+      --surface: #fffefa;
+      --ink: #172321;
+      --muted: #62716c;
+      --line: #d9ded7;
+      --accent: #285c50;
+      --accent-bright: #c9f36a;
+      --soft: #e8ede5;
+      --shadow: 0 18px 55px rgba(28, 48, 41, .08);
     }
-
-    body.dark {
-      --bg-color: #121212;
-      --text-color: #e0e0e0;
-      --card-color: #1f1f1f;
-      --header-bg: linear-gradient(to right, #3a3a3a, #1c1c1c);
-      --highlight-color: #bb86fc;
-    }
-
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
     body {
-      font-family: 'Poppins', sans-serif;
       margin: 0;
-      padding: 0;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      transition: background-color 0.3s, color 0.3s;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
-
-    header {
-      background: var(--header-bg);
-      color: white;
-      text-align: center;
-      padding: 60px 20px 40px;
-      transition: background 0.3s;
+    a { color: inherit; }
+    a:focus-visible, button:focus-visible { outline: 3px solid #6d9d87; outline-offset: 4px; }
+    .shell { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+    .topbar {
+      position: sticky; top: 0; z-index: 5;
+      background: rgba(245, 244, 239, .9); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(217, 222, 215, .8);
     }
-
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
+    .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font-weight: 750; letter-spacing: -.03em; }
+    .brand-mark { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 11px; background: var(--ink); color: var(--accent-bright); font-size: 15px; }
+    .nav-links { display: flex; align-items: center; gap: 27px; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 650; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-contact { padding: 10px 15px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink) !important; }
+    .hero { min-height: 455px; display: grid; grid-template-columns: 1.25fr .75fr; align-items: center; gap: 42px; padding-block: 54px 58px; }
+    .eyebrow { display: flex; align-items: center; gap: 10px; margin: 0 0 22px; color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 25px; height: 1px; background: currentColor; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 700px; margin-bottom: 15px; font-size: clamp(58px, 7.2vw, 82px); line-height: .96; letter-spacing: -.075em; font-weight: 740; }
+    h1 span { color: var(--accent); }
+    .hero-tagline { margin: 0 0 18px; font-size: clamp(21px, 2.6vw, 29px); line-height: 1.15; font-weight: 680; letter-spacing: -.045em; }
+    .hero-copy { max-width: 550px; margin-bottom: 29px; color: var(--muted); font-size: 17px; }
+    .hero-copy strong { color: var(--ink); font-weight: 650; }
+    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 46px; padding: 0 18px; border: 1px solid var(--ink); border-radius: 999px; text-decoration: none; font-size: 13px; font-weight: 750; transition: transform .2s, background .2s; }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { background: var(--ink); color: white; }
+    .button-primary:hover { background: var(--accent); }
+    .button-quiet { border-color: var(--line); background: transparent; }
+    .hero-art { position: relative; min-height: 345px; display: grid; place-items: center; }
+    .orbit-card { position: relative; width: min(100%, 350px); aspect-ratio: 1 / 1.08; padding: 22px; overflow: hidden; border-radius: 180px 180px 26px 26px; background: var(--ink); color: #f7f8ef; box-shadow: var(--shadow); }
+    .orbit-card::before, .orbit-card::after { content: ""; position: absolute; border: 1px solid rgba(201, 243, 106, .33); border-radius: 50%; transform: rotate(-28deg); }
+    .orbit-card::before { width: 410px; height: 150px; left: -57px; top: 105px; }
+    .orbit-card::after { width: 410px; height: 190px; left: -75px; top: 90px; }
+    .art-top, .art-bottom { position: absolute; z-index: 1; left: 24px; right: 24px; display: flex; justify-content: space-between; color: #d5ddcf; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .art-top { top: 24px; }
+    .art-bottom { bottom: 23px; align-items: end; }
+    .planet { position: absolute; z-index: 1; width: 135px; height: 135px; top: 85px; left: 50%; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(circle at 35% 30%, #e5ff9d, #a5cd60 48%, #688d51 72%, #415d48); box-shadow: 0 0 65px rgba(201, 243, 106, .18); }
+    .planet::after { content: ""; position: absolute; inset: 46px -42px; border: 2px solid rgba(228, 244, 203, .72); border-radius: 50%; transform: rotate(-19deg); }
+    .orbit-index { font-size: 12px; color: var(--accent-bright); }
+    .art-caption { max-width: 130px; margin: 0; font-size: 12px; line-height: 1.4; }
+    .scroll-note { position: absolute; bottom: -13px; left: 50%; transform: translateX(-50%); color: var(--muted); font-size: 10px; letter-spacing: .15em; text-transform: uppercase; white-space: nowrap; }
+    .section { padding-block: 60px; border-top: 1px solid var(--line); }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 25px; }
+    .section-kicker { margin-bottom: 8px; color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+    h2 { margin-bottom: 0; font-size: clamp(32px, 4.4vw, 48px); line-height: 1.08; letter-spacing: -.055em; }
+    .section-intro { max-width: 370px; margin-bottom: 2px; color: var(--muted); font-size: 14px; }
+    .project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .project { overflow: hidden; border: 1px solid var(--line); border-radius: 17px; background: var(--surface); transition: transform .2s, box-shadow .2s; }
+    .project:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .project-visual { min-height: 165px; display: grid; place-items: center; overflow: hidden; background: #dfe8db; }
+    .project:nth-child(2) .project-visual { background: #e7e7dc; }
+    .mini-window { width: 75%; max-width: 340px; padding: 12px; border: 1px solid rgba(23, 35, 33, .1); border-radius: 11px; background: #fffefa; box-shadow: 0 18px 30px rgba(23, 35, 33, .12); transform: rotate(-3deg); }
+    .project:nth-child(2) .mini-window { transform: rotate(3deg); }
+    .window-dots { display: flex; gap: 4px; margin-bottom: 12px; }
+    .window-dots i { width: 5px; height: 5px; border-radius: 50%; background: #c5cec4; }
+    .mock-title { width: 45%; height: 7px; margin-bottom: 11px; border-radius: 8px; background: #315a4d; }
+    .mock-row { height: 20px; display: grid; grid-template-columns: 1.2fr 1fr .55fr; gap: 6px; margin-bottom: 5px; }
+    .mock-row i { border-radius: 3px; background: #edf0e9; }
+    .mock-row:first-of-type i:first-child { background: #e5efd8; }
+    .mock-chart { width: 100%; height: 68px; margin-top: 9px; border-radius: 5px; background: linear-gradient(160deg, transparent 45%, #88aa70 46%, #88aa70 48%, transparent 49%), linear-gradient(180deg, #f5f6ef, #e7eee0); }
+    .mock-hero { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .mock-copy { width: 56%; }
+    .mock-copy i { display: block; height: 7px; margin-bottom: 7px; border-radius: 8px; background: #c9d1c5; }
+    .mock-copy i:first-child { width: 90%; height: 11px; background: #315a4d; }
+    .mock-copy i:last-child { width: 65%; }
+    .mock-orbit { width: 65px; height: 65px; border: 8px solid #b7d37f; border-radius: 50%; box-shadow: 0 0 0 6px #e6efd7; }
+    .project-body { padding: 19px 21px 21px; }
+    .project-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; color: var(--muted); font-size: 10px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+    .project-no { color: var(--accent); }
+    h3 { margin-bottom: 9px; font-size: 21px; letter-spacing: -.04em; }
+    .project-body p { margin-bottom: 17px; color: var(--muted); font-size: 13px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag { padding: 5px 9px; border-radius: 999px; background: var(--soft); color: #42534a; font-size: 10px; font-weight: 700; }
+    .project-details { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); }
+    .project-details summary { color: var(--accent); cursor: pointer; font-size: 12px; font-weight: 750; }
+    .project-details p { margin: 10px 0 0; font-size: 12px; }
+    .project-highlights { display: grid; gap: 6px; margin: 0 0 17px; padding: 0; list-style: none; color: var(--muted); font-size: 12px; }
+    .project-highlights li { position: relative; padding-left: 15px; }
+    .project-highlights li::before { content: "↗"; position: absolute; left: 0; color: var(--accent); font-weight: 800; }
+    .project-stack { margin-top: 14px; }
+    .project-stack summary { color: var(--accent); cursor: pointer; font-size: 11px; font-weight: 750; }
+    .project-stack p { margin: 8px 0 0; font-size: 11px; }
+    .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 46px; align-items: start; }
+    .about-copy { max-width: 660px; color: var(--muted); font-size: 15px; }
+    .about-copy p:last-child { margin-bottom: 0; }
+    .education-list { border-top: 1px solid var(--line); }
+    .education-item { display: grid; grid-template-columns: 110px 1fr; gap: 20px; padding: 19px 0; border-bottom: 1px solid var(--line); }
+    .education-item time { color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .education-item strong { display: block; margin-bottom: 3px; font-size: 14px; }
+    .education-item span { color: var(--muted); font-size: 12px; }
+    .certificates { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .certificate { overflow: hidden; margin: 0; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); box-shadow: 0 10px 30px rgba(28, 48, 41, .06); }
+    .certificate img { display: block; width: 100%; height: auto; background: var(--soft); }
+    .certificate figcaption { padding: 13px 17px 15px; color: var(--muted); font-size: 12px; font-weight: 650; }
+    .certificate figcaption strong { display: block; color: var(--ink); font-size: 14px; }
+    .skills-wrap { display: grid; grid-template-columns: .7fr 1.3fr; gap: 46px; align-items: start; }
+    .skill-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .skill-group { min-height: 110px; padding: 18px; border: 1px solid var(--line); border-radius: 13px; background: var(--surface); }
+    .skill-group strong { display: block; margin-bottom: 11px; color: var(--accent); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+    .skill-group p { margin: 0; color: var(--muted); font-size: 13px; }
+    .contact-panel { position: relative; display: flex; align-items: end; justify-content: space-between; gap: 30px; overflow: hidden; padding: 43px; border-radius: 20px; background: var(--ink); color: white; }
+    .contact-panel::after { content: ""; position: absolute; width: 220px; height: 220px; top: -130px; right: 80px; border: 1px solid rgba(201, 243, 106, .25); border-radius: 50%; box-shadow: 0 0 0 24px rgba(201, 243, 106, .04), 0 0 0 50px rgba(201, 243, 106, .03); }
+    .contact-panel h2 { max-width: 520px; margin-bottom: 13px; }
+    .contact-panel p { max-width: 440px; margin: 0; color: #c2cec7; font-size: 14px; }
+    .contact-panel .button { position: relative; z-index: 1; flex: 0 0 auto; border-color: var(--accent-bright); background: var(--accent-bright); color: var(--ink); }
+    footer { padding: 28px 0 34px; color: var(--muted); font-size: 11px; }
+    .footer-row { display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid var(--line); padding-top: 22px; }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a { text-decoration: none; }
+    .footer-links a:hover { color: var(--ink); }
+    @media (max-width: 760px) {
+      .shell { width: min(100% - 36px, 560px); }
+      .nav { min-height: 64px; }
+      .nav-links { gap: 14px; }
+      .nav-links a:not(.nav-contact) { display: none; }
+      .hero { min-height: unset; grid-template-columns: 1fr; gap: 22px; padding-block: 48px 42px; }
+      h1 { font-size: clamp(56px, 13vw, 74px); }
+      .hero-tagline { font-size: 22px; }
+      .hero-art { min-height: 285px; }
+      .orbit-card { width: 245px; }
+      .planet { width: 100px; height: 100px; }
+      .planet::after { inset: 34px -32px; }
+      .section { padding-block: 48px; }
+      .section-heading { align-items: start; flex-direction: column; gap: 14px; }
+      .project-grid { grid-template-columns: 1fr; }
+      .project-visual { min-height: 155px; }
+      .about-grid, .skills-wrap { grid-template-columns: 1fr; gap: 26px; }
+      .contact-panel { align-items: start; flex-direction: column; padding: 30px 25px; }
+      .footer-row { flex-direction: column; }
     }
-
-    header p {
-      font-size: 1.3rem;
-      margin: 0;
+    @media (max-width: 420px) {
+      .brand { font-size: 13px; }
+      .nav-contact { padding: 8px 11px; }
+      .hero-copy { font-size: 15px; }
+      .education-item { grid-template-columns: 82px 1fr; gap: 12px; }
+      .skill-groups { grid-template-columns: 1fr; }
+      .footer-links { flex-wrap: wrap; }
     }
-
-    .toggle-mode {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background-color: var(--card-color);
-      color: var(--text-color);
-      border: none;
-      padding: 10px 16px;
-      border-radius: 20px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      transition: background-color 0.3s, color 0.3s;
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
     }
-
-    section {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-
-    .card {
-      background-color: var(--card-color);
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      padding: 30px;
-      margin-bottom: 30px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeIn 0.8s ease-out forwards;
-    }
-
-    .card:nth-child(2) { animation-delay: 0.2s; }
-    .card:nth-child(3) { animation-delay: 0.4s; }
-    .card:nth-child(4) { animation-delay: 0.6s; }
-    .card:nth-child(5) { animation-delay: 0.8s; }
-
-    h2 {
-      color: var(--highlight-color);
-      margin-bottom: 10px;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    a {
-      color: var(--highlight-color);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      background-color: #333;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-    }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2rem;
-      }
-      header p {
-        font-size: 1rem;
-      }
-    }
-
-    .resume-button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: var(--highlight-color);
-  color: white;
-  border: none;
-  border-radius: 25px;
-  font-weight: bold;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background-color 0.3s;
-}
-
-.resume-button:hover {
-  background-color: #ff5e9c; /* Slightly darker pink */
-}
-
-.projects ul {
-  list-style-type: square;
-  padding-left: 20px;
-}
-
-.projects li {
-  margin-bottom: 10px;
-  font-weight: 500;
-}
-
   </style>
 </head>
 <body>
-
-  <button class="toggle-mode" onclick="toggleDarkMode()">Dark Mode</button>
-
-  <header>
-    <h1>Maitri Patangiya</h1>
-    <p>B.Tech CSIT Student | Aspiring AI & ML Engineer | Actively Learning Python & AI</p>
-  </header>
-
-  <section>
-    <div class="card">
-      <h2>About Me</h2>
-      <p>Hi! I'm <strong>Maitri Patangiya</strong>, a passionate and curious learner with a strong interest in emerging technologies. I completed my 12th from <strong>Queens' College, Indore</strong> and am currently pursuing my B.Tech in <strong>Computer Science and Information Technology</strong> at <strong>Symbiosis University of Applied Sciences</strong>. I am deeply fascinated by Artificial Intelligence, Machine Learning, Data Science, Cybersecurity, and space-related innovations. With a sharp eye for detail and a genuine curiosity for how things work, I aim to become a professional who contributes meaningfully to the tech-driven future.</p>
-    </div>
-
-    <div class="card">
-      <h2>Education</h2>
-      <ul>
-        <li><strong>B.Tech in CSIT</strong> – Symbiosis University of Applied Sciences (Ongoing)</li>
-        <li><strong>Higher Secondary</strong> – Queens' College, Indore</li>
-      </ul>
-    </div>
-
-<div class="card">
-  <h2>Projects</h2>
-  <ul>
-    <li><strong>Java-based Employee Management System:</strong>  
-      A simple desktop application developed using Java and MySQL. It allows users to insert, update, delete, and view employee details through a user-friendly interface.
-    </li>
-    <li><strong>Personal Portfolio Website:</strong>  
-      A responsive portfolio site built using HTML, CSS, and JavaScript. It showcases my education, skills, contact information, and resume download option with dark mode support.
-    </li>
-  </ul>
-</div>
-
-    <div class="card">
-      <h2>Skills</h2>
-      <ul>
-        <li><strong>Technical:</strong> SQL, DBMS, Java, Python, C, C++, Data Structures, HTML, CSS, JavaScript, Web Development</li>
-        <li><strong>Soft Skills:</strong> Teamwork, Decision Making</li>
-      </ul>
-    </div>
-
-    <div class="card">
-    <h2>Resume</h2>
-    <a href="https://github.com/Maitri-hub/Portfolio/raw/main/resume%20(2).pdf" target="_blank" download>
-      <button>Download My Resume</button>
-    </a>
+  <div class="topbar">
+    <nav class="nav shell" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Maitri Patangiya home"><span class="brand-mark">M</span><span>Maitri Patangiya</span></a>
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="#certificates">Certificates</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a class="nav-contact" href="#contact">Say hello ↗</a>
+      </div>
+    </nav>
   </div>
 
-    <div class="card">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:maitripatangiya@gmail.com">maitripatangiya@gmail.com</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/maitri-patangiya" target="_blank">linkedin.com/in/maitri-patangiya</a></p>
+  <main id="top">
+    <div class="shell">
+      <section class="hero" aria-labelledby="intro-title">
+        <div>
+          <p class="eyebrow">CSIT student · curious by design</p>
+          <h1 id="intro-title">Maitri<br /><span>Patangiya</span></h1>
+          <p class="hero-tagline">I make sense of what’s next.</p>
+          <p class="hero-copy">I’m Maitri, a computer science student exploring <strong>AI, machine learning, and thoughtful software.</strong> I like turning questions into small, useful things—and learning something new with every build.</p>
+          <div class="actions">
+            <a class="button button-primary" href="#work">Explore my work <span aria-hidden="true">↘</span></a>
+            <a class="button button-quiet" href="resume%20(2).pdf" target="_blank" rel="noopener">View resume <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="An abstract orbit illustration representing curiosity and exploration">
+          <div class="orbit-card">
+            <div class="art-top"><span>Field notes / 01</span><span>Curiosity, in orbit</span></div>
+            <div class="planet"></div>
+            <div class="art-bottom"><span class="orbit-index">MP — 2026</span><p class="art-caption">A work in progress,<br />by design.</p></div>
+          </div>
+          <span class="scroll-note">Scroll to explore ↓</span>
+        </div>
+      </section>
+
+      <section class="section" id="work" aria-labelledby="work-title">
+        <div class="section-heading">
+          <div><p class="section-kicker">Selected projects · 01—02</p><h2 id="work-title">Things I’ve built.</h2></div>
+          <p class="section-intro">Full-stack work from my second-year AI internship: one individual system and one team project where I focused on banquet operations.</p>
+        </div>
+        <div class="project-grid">
+          <article class="project">
+            <div class="project-visual" aria-hidden="true">
+              <div class="mini-window"><div class="window-dots"><i></i><i></i><i></i></div><div class="mock-title"></div><div class="mock-row"><i></i><i></i><i></i></div><div class="mock-row"><i></i><i></i><i></i></div><div class="mock-row"><i></i><i></i><i></i></div><div class="mock-chart"></div></div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta"><span>Individual · iSoftZone internship</span><span class="project-no">01 / 02</span></div>
+              <h3>Employee Management System</h3>
+              <p>A full-stack system for employee operations, built as my individual internship project. I worked across the UI, APIs, and database while learning how the pieces fit together.</p>
+              <ul class="project-highlights"><li>Employee, department, skills, and leave management</li><li>REST API integration and backend/database troubleshooting</li><li>Dashboard analytics, authentication, and role-based access</li></ul>
+              <div class="tags"><span class="tag">React · Vite</span><span class="tag">Node · Express</span><span class="tag">PostgreSQL · Prisma</span><span class="tag">JWT · RBAC</span></div>
+              <details class="project-stack"><summary>More tools used</summary><p>JavaScript, Redux Toolkit, React Context, Framer Motion, Lucide React, Recharts, XLSX, jsPDF, Vercel, Render, and Neon.</p></details>
+            </div>
+          </article>
+          <article class="project">
+            <div class="project-visual" aria-hidden="true">
+              <div class="mini-window"><div class="window-dots"><i></i><i></i><i></i></div><div class="mock-hero"><div class="mock-copy"><i></i><i></i><i></i></div><div class="mock-orbit"></div></div><div class="mock-row" style="margin-top:16px"><i></i><i></i><i></i></div><div class="mock-row"><i></i><i></i><i></i></div></div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta"><span>Team project · iSoftZone internship</span><span class="project-no">02 / 02</span></div>
+              <h3>EventHub360 · Banquet Management</h3>
+              <p>Part of a team-built event platform with several modules. I focused on banquet backend logic, booking state management, and keeping booking and billing calculations in sync.</p>
+              <ul class="project-highlights"><li>Hall availability and booking conflict detection</li><li>Banquet Event Order (BEO), menu, and layout management</li><li>Event cost calculations and revenue reporting</li></ul>
+              <div class="tags"><span class="tag">React · TypeScript</span><span class="tag">Node · Express</span><span class="tag">PostgreSQL</span><span class="tag">REST APIs</span></div>
+              <details class="project-stack"><summary>More tools used</summary><p>Vite, Tailwind CSS, Git, GitHub, and VS Code.</p></details>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="experience" aria-labelledby="experience-title">
+        <div class="about-grid">
+          <div><p class="section-kicker">Where I’ve been learning</p><h2 id="experience-title">Experience<br />so far.</h2></div>
+          <div class="education-list">
+            <div class="education-item"><time>Jun–Aug 2026</time><div><strong>AI &amp; Software Development Internship · i-SoftZone</strong><span>Worked on an individual Employee Management System and contributed to the EventHub360 team project, focusing on its banquet module. The internship certificate records Full Stack Web Development.</span></div></div>
+            <div class="education-item"><time>Jun–Aug 2025</time><div><strong>Python with AI Internship · YHills</strong><span>Built a foundation in Python and explored introductory applications of AI through hands-on learning.</span></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="certificates" aria-labelledby="certificates-title">
+        <div class="section-heading">
+          <div><p class="section-kicker">Proof of learning</p><h2 id="certificates-title">Internship certificates.</h2></div>
+          <p class="section-intro">A couple of milestones from my learning journey, shown here in full.</p>
+        </div>
+        <div class="certificates" aria-label="Internship certificates">
+          <figure class="certificate"><img src="assets/certificates/isoftzone-full-stack-internship.png" alt="i-SoftZone Full Stack Web Development internship certificate awarded to Maitri Patangiya for June to August 2026" loading="lazy" /><figcaption><strong>i-SoftZone</strong>Full Stack Web Development · June–August 2026</figcaption></figure>
+          <figure class="certificate"><img src="assets/certificates/yhills-ai-python-internship.jpg" alt="YHills Artificial Intelligence with Python internship completion certificate awarded to Maitri Patangiya for June to August 2025" loading="lazy" /><figcaption><strong>YHills</strong>Artificial Intelligence with Python · June–August 2025</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="section" id="about" aria-labelledby="about-title">
+        <div class="about-grid">
+          <div><p class="section-kicker">A little context</p><h2 id="about-title">Learning by<br />making.</h2></div>
+          <div>
+            <div class="about-copy">
+              <p>I’m currently pursuing a B.Tech in Computer Science and Information Technology at Symbiosis University of Applied Sciences. Before that, I completed my higher secondary education at Queens’ College, Indore.</p>
+              <p>My interests span AI and machine learning, data science, cybersecurity, and space-related technology. I’m still early in the journey, and that’s what makes it exciting: there’s always another idea to test, skill to practice, or problem to understand.</p>
+            </div>
+            <div class="education-list" style="margin-top:28px">
+              <div class="education-item"><time>In progress</time><div><strong>B.Tech in Computer Science &amp; IT</strong><span>Symbiosis University of Applied Sciences</span></div></div>
+              <div class="education-item"><time>Completed</time><div><strong>Higher Secondary</strong><span>Queens’ College, Indore</span></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="skills" aria-labelledby="skills-title">
+        <div class="skills-wrap">
+          <div><p class="section-kicker">Current toolkit</p><h2 id="skills-title">Tools I’m<br />growing with.</h2></div>
+          <div class="skill-groups">
+            <div class="skill-group"><strong>Languages</strong><p>Python · Java · JavaScript · TypeScript · C · C++ · SQL</p></div>
+            <div class="skill-group"><strong>Frontend &amp; backend</strong><p>React · Vite · HTML · CSS · Tailwind · Node.js · Express</p></div>
+            <div class="skill-group"><strong>Data &amp; application</strong><p>PostgreSQL · MySQL · Prisma · REST APIs · Redux Toolkit · React Context</p></div>
+            <div class="skill-group"><strong>Reporting &amp; tools</strong><p>Recharts · XLSX · jsPDF · Git · GitHub · Vercel · Render · Neon</p></div>
+            <div class="skill-group"><strong>Foundations</strong><p>Data structures · DBMS · Web development</p></div>
+            <div class="skill-group"><strong>How I work</strong><p>Teamwork · Decision making · Curiosity</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact" aria-labelledby="contact-title">
+        <div class="contact-panel">
+          <div><p class="section-kicker" style="color:var(--accent-bright)">Open to conversations</p><h2 id="contact-title">Have an idea or opportunity?</h2><p>I’d be glad to connect, hear what you’re working on, or talk about where I’m headed next.</p></div>
+          <a class="button" href="mailto:maitripatangiya@gmail.com">Email me <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
     </div>
-  </section>
-
-  <footer>
-    <p>© 2025 Maitri Patangiya. All rights reserved.</p>
+  </main>
+  <footer class="shell">
+    <div class="footer-row"><span>© 2026 Maitri Patangiya · Made with curiosity.</span><div class="footer-links"><a href="mailto:maitripatangiya@gmail.com">Email</a><a href="https://www.linkedin.com/in/maitri-patangiya" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://github.com/Maitri-hub" target="_blank" rel="noopener">GitHub ↗</a></div></div>
   </footer>
-
-  <script>
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark');
-    }
-  </script>
-
 </body>
 </html>
